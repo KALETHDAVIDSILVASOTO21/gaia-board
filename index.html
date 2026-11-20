@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAIA Board · Historias de usuario con IA responsable</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">G</span>
+      <div>
+        <h1>GAIA Board</h1>
+        <p>Historias de usuario con uso responsable de IA</p>
+      </div>
+    </div>
+    <div class="stats" id="stats" aria-live="polite"></div>
+  </header>
+
+  <main class="layout">
+    <!-- CREATE / UPDATE: formulario -->
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Nueva historia</h2>
+      <form id="story-form" novalidate>
+        <input type="hidden" id="story-id">
+
+        <label for="title">Título <span class="req">*</span></label>
+        <input id="title" type="text" maxlength="80" placeholder="Ej.: Inicio de sesión con correo institucional">
+
+        <label for="description">Descripción <span class="req">*</span></label>
+        <textarea id="description" rows="3" placeholder="Como [rol], quiero [acción], para [beneficio]"></textarea>
+
+        <div class="row">
+          <div>
+            <label for="owner">Responsable humano <span class="req">*</span></label>
+            <input id="owner" type="text" maxlength="40" placeholder="Nombre de quien responde">
+          </div>
+          <div>
+            <label for="points">Puntos</label>
+            <select id="points">
+              <option>1</option><option>2</option><option selected>3</option>
+              <option>5</option><option>8</option><option>13</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="ai-tool">Herramienta de IA usada</label>
+            <select id="ai-tool">
+              <option value="Ninguna">Ninguna</option>
+              <option>ChatGPT</option>
+              <option>Claude</option>
+              <option>GitHub Copilot</option>
+              <option>Cursor</option>
+              <option>Otra</option>
+            </select>
+          </div>
+          <div>
+            <label for="status">Estado</label>
+            <select id="status">
+              <option>Por hacer</option>
+              <option>En progreso</option>
+              <option>Hecho</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset id="dod-box" class="dod">
+          <legend>Definición de Hecho ampliada</legend>
+          <p class="hint">Obligatoria para marcar como «Hecho» una historia que usó IA.</p>
+          <label class="check"><input type="checkbox" data-dod="tests"> Pruebas automatizadas pasan</label>
+          <label class="check"><input type="checkbox" data-dod="security"> Análisis de seguridad sin hallazgos críticos</label>
+          <label class="check"><input type="checkbox" data-dod="deps"> Dependencias verificadas (existen y son confiables)</label>
+          <label class="check"><input type="checkbox" data-dod="review"> Revisión humana real del cambio completo</label>
+          <label class="check"><input type="checkbox" data-dod="license"> Licencias revisadas y sin datos sensibles</label>
+        </fieldset>
+
+        <p id="form-error" class="error" role="alert"></p>
+
+        <div class="actions">
+          <button type="submit" class="btn primary" id="submit-btn">Guardar historia</button>
+          <button type="button" class="btn ghost" id="cancel-btn" hidden>Cancelar edición</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- READ: listado -->
+    <section class="panel list-panel" aria-labelledby="list-title">
+      <div class="list-head">
+        <h2 id="list-title">Backlog</h2>
+        <div class="filters">
+          <input id="search" type="search" placeholder="Buscar por título o responsable">
+          <select id="filter-status" aria-label="Filtrar por estado">
+            <option value="">Todos los estados</option>
+            <option>Por hacer</option>
+            <option>En progreso</option>
+            <option>Hecho</option>
+          </select>
+          <select id="filter-ai" aria-label="Filtrar por uso de IA">
+            <option value="">Con y sin IA</option>
+            <option value="si">Solo con IA</option>
+            <option value="no">Solo sin IA</option>
+          </select>
+        </div>
+      </div>
+      <ul id="story-list" class="cards"></ul>
+      <p id="empty" class="empty" hidden>No hay historias que coincidan. Crea la primera con el formulario.</p>
+    </section>
+  </main>
+
+  <!-- DELETE: confirmación -->
+  <dialog id="confirm-dialog">
+    <h3>¿Eliminar historia?</h3>
+    <p id="confirm-text"></p>
+    <div class="actions">
+      <button class="btn danger" id="confirm-yes">Sí, eliminar</button>
+      <button class="btn ghost" id="confirm-no">Cancelar</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
