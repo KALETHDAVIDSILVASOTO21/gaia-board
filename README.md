@@ -8,7 +8,9 @@ Trabajo práctico del seminario *Gestión de Software Ágil asistido por Intelig
 
 ---
 
+## Demo en línea
 
+🌐 [Ver la app en línea](https://kalethdavidsilvasoto21.github.io/gaia-board/)
 
 ## Descripción
 
