@@ -8,9 +8,7 @@ Trabajo práctico del seminario *Gestión de Software Ágil asistido por Intelig
 
 ---
 
-## Video explicativo
 
-▶️ [Ver el video del desarrollo y la demo](ENLACE_DEL_VIDEO)
 
 ## Descripción
 
